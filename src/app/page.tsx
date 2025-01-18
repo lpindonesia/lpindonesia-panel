@@ -17,7 +17,6 @@ export default async function Home() {
 
   async function updateEventParticipants(formData: FormData) {
     'use server'
-    console.log(process.env.API_KEY)
     if (formData.get(FIELD_NAMES.PASSCODE) !== process.env.API_KEY) {
       redirect('/')
     }
@@ -37,34 +36,59 @@ export default async function Home() {
   }
 
   return (
-    <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
-      <form action={updateEventParticipants}>
-        <label htmlFor={FIELD_NAMES.CURRENT_PARTICIPANTS}>
-          Current participants
-        </label>
-        <input
-          name={FIELD_NAMES.CURRENT_PARTICIPANTS}
-          type='number'
-          placeholder='Number of current participants'
-          defaultValue={event?.current_participants ?? 0}
-        />
-        <label htmlFor={FIELD_NAMES.MAX_PARTICIPANTS}>
-          Maximum participants
-        </label>
-        <input
-          name={FIELD_NAMES.MAX_PARTICIPANTS}
-          type='number'
-          placeholder='Maximum number of participants'
-          defaultValue={event?.max_participants ?? 0}
-        />
-        <label htmlFor={FIELD_NAMES.PASSCODE}>Passcode</label>
-        <input
-          name={FIELD_NAMES.PASSCODE}
-          type='text'
-          placeholder='Passcode'
-          defaultValue={event?.passcode ?? ''}
-        />
-        <button type='submit'>Update</button>
+    <div className='flex items-center justify-items-center min-h-screen p-8 pb-20'>
+      <form action={updateEventParticipants} autoComplete='off'>
+        <div className='p-6 rounded-lg shadow-md bg-white mb-4'>
+          <label
+            htmlFor={FIELD_NAMES.CURRENT_PARTICIPANTS}
+            className='block text-gray-700 text-sm font-bold mb-2'
+          >
+            Current participants
+          </label>
+          <input
+            name={FIELD_NAMES.CURRENT_PARTICIPANTS}
+            type='number'
+            placeholder='Number of current participants'
+            defaultValue={event?.current_participants ?? 0}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
+        <div className='p-6 rounded-lg shadow-md bg-white mb-4'>
+          <label
+            htmlFor={FIELD_NAMES.MAX_PARTICIPANTS}
+            className='block text-gray-700 text-sm font-bold mb-2'
+          >
+            Maximum participants
+          </label>
+          <input
+            name={FIELD_NAMES.MAX_PARTICIPANTS}
+            type='number'
+            placeholder='Maximum number of participants'
+            defaultValue={event?.max_participants ?? 0}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
+        <div className='p-6 rounded-lg shadow-md bg-white mb-4'>
+          <label
+            htmlFor={FIELD_NAMES.PASSCODE}
+            className='block text-gray-700 text-sm font-bold mb-2'
+          >
+            Passcode
+          </label>
+          <input
+            name={FIELD_NAMES.PASSCODE}
+            type='text'
+            placeholder='Passcode'
+            defaultValue={event?.passcode ?? ''}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
+        <button
+          type='submit'
+          className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+        >
+          Update
+        </button>
       </form>
     </div>
   )
