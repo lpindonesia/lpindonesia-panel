@@ -36,9 +36,14 @@ export default async function Home() {
   }
 
   return (
-    <div className='flex items-center justify-items-center min-h-screen p-8 pb-20'>
-      <form action={updateEventParticipants} autoComplete='off'>
-        <div className='p-6 rounded-lg shadow-md bg-white mb-4'>
+    <div className='flex flex-col items-center justify-center min-h-screen p-8'>
+      <form
+        action={updateEventParticipants}
+        autoComplete='off'
+        className='p-6 rounded-lg shadow-md bg-white'
+      >
+        <h1 className='text-xl font-bold'>{event?.name ?? ''}</h1>
+        <div className='mt-6'>
           <label
             htmlFor={FIELD_NAMES.CURRENT_PARTICIPANTS}
             className='block text-gray-700 text-sm font-bold mb-2'
@@ -53,7 +58,7 @@ export default async function Home() {
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
-        <div className='p-6 rounded-lg shadow-md bg-white mb-4'>
+        <div className='mt-4'>
           <label
             htmlFor={FIELD_NAMES.MAX_PARTICIPANTS}
             className='block text-gray-700 text-sm font-bold mb-2'
@@ -68,7 +73,7 @@ export default async function Home() {
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
-        <div className='p-6 rounded-lg shadow-md bg-white mb-4'>
+        <div className='mt-4'>
           <label
             htmlFor={FIELD_NAMES.PASSCODE}
             className='block text-gray-700 text-sm font-bold mb-2'
@@ -81,11 +86,12 @@ export default async function Home() {
             placeholder='Passcode'
             defaultValue={event?.passcode ?? ''}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            required
           />
         </div>
         <button
           type='submit'
-          className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          className='mt-8 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
         >
           Update
         </button>
