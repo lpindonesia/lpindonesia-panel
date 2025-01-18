@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 const FIELD_NAMES = {
   CURRENT_PARTICIPANTS: 'current_participants',
   MAX_PARTICIPANTS: 'max_participants',
+  PASSCODE: 'passcode',
 }
 
 export default async function Home() {
@@ -16,6 +17,11 @@ export default async function Home() {
 
   async function updateEventParticipants(formData: FormData) {
     'use server'
+    console.log(process.env.API_KEY)
+    if (formData.get(FIELD_NAMES.PASSCODE) !== process.env.API_KEY) {
+      redirect('/')
+    }
+
     const supabase = await createClient()
 
     const rawFormData = {
@@ -50,6 +56,13 @@ export default async function Home() {
           type='number'
           placeholder='Maximum number of participants'
           defaultValue={event?.max_participants ?? 0}
+        />
+        <label htmlFor={FIELD_NAMES.PASSCODE}>Passcode</label>
+        <input
+          name={FIELD_NAMES.PASSCODE}
+          type='text'
+          placeholder='Passcode'
+          defaultValue={event?.passcode ?? ''}
         />
         <button type='submit'>Update</button>
       </form>
